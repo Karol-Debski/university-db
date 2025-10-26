@@ -3,7 +3,7 @@ Simple academic database written in C++ allowing keep records about studends and
 
 # Functionalities
 Storing student records with the following structure:
-first name,
+- first name,
 last name,
 address,
 PESEL number,

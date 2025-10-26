@@ -2,17 +2,14 @@
 Simple academic database written in C++ allowing keep records about studends and employees.
 
 # Functionalities
-<ol>
-<li>Storing student records with the following structure:</li>
-</ol>
-<ul>
-  <li>first name,</li>
-  <li>last name,</li>
-  <li>address,</li>
-  <li>PESEL number,</li>
-  <li>gender,</li>
-  <li>index number.</li>
-</ul>
+1) Storing student records with the following structure:
+  - first name,</li>
+  - last name,</li>
+  - address,</li>
+  - PESEL number,</li>
+  - gender,</li>
+  - index number.
+
 Storing employees records with the following structure:
 first name,
 last name,

@@ -28,3 +28,10 @@ Simple academic database written in C++ allowing keep records about studends and
 12) Loading and saving whole DB from/to file.
 13) All records are keep in single container.
 14) Filling the database with artificial data.
+
+# How to build and run 
+- mkdir build
+- cd build
+- cmake ..
+- make
+- ./university-db

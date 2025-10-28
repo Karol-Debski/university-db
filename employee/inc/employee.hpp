@@ -1,8 +1,9 @@
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
 #include "record.hpp"
 #include <sstream>
 
-#ifndef EMPLOYEE_H
-#define EMPLOYEE_H
 
 class Employee : public Record,
                  public HasFirstName,

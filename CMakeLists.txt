@@ -13,14 +13,15 @@ include_directories(
    ${CMAKE_SOURCE_DIR}/student/inc
    ${CMAKE_SOURCE_DIR}/employee/inc
    ${CMAKE_SOURCE_DIR}/record/inc
-
+   ${CMAKE_SOURCE_DIR}/datebase/inc
+   
 )
 
 set(SOURCES
    main.cpp
    student/src/student.cpp
    employee/src/employee.cpp
-   
+   datebase/src/datebase.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

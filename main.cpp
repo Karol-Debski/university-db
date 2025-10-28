@@ -2,10 +2,7 @@
 #include <vector>
 #include "student.hpp"
 #include "employee.hpp"
-
-
-
-
+#include "datebase.hpp"
 
 
 
@@ -16,10 +13,13 @@ int main()
 
    Employee emp1("Alicja", "Konkol", "Kwiatowa 4", 23423122, "female", 345343u);
 
-   std::vector<Record*> records{&s1, &s2, &emp1};
+   std::ofstream stream;
 
-   for(const auto& rec : records)
-   {
-      std::cout<<rec->getData();
-   }
+   Datebase datebase(stream, "database-uni.txt");
+
+   datebase.addNewRecord(std::make_shared<Student>(s1));
+   datebase.addNewRecord(std::make_shared<Student>(s2));
+   datebase.addNewRecord(std::make_shared<Employee>(emp1));
+
+   datebase.displayDatabase();
 }

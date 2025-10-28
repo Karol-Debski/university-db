@@ -1,8 +1,9 @@
+#ifndef STUDENT_H
+#define STUDENT_H
+
 #include "record.hpp"
 #include <sstream>
 
-#ifndef STUDENT_H
-#define STUDENT_H
 
 class Student : public Record,
                 public HasFirstName,

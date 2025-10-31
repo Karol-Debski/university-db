@@ -17,7 +17,7 @@ const std::string& Student::getAddress() const
    return address_;
 };
 
-PeselNumber_t Student::getPeselNumber() const 
+const std::string& Student::getPeselNumber() const 
 {
    return peselNumber_;
 };

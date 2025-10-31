@@ -17,7 +17,7 @@ public:
    explicit Student(const std::string&  firstName, 
                     const std::string&  lastName, 
                     const std::string&  address,
-                    const PeselNumber_t peselNumber,
+                    const std::string&  peselNumber,
                     const std::string&  gender,
                     const IndexNumber_t indexNumber)
       : firstName_(firstName),
@@ -31,7 +31,7 @@ public:
    const std::string& getFirstName()   const override;
    const std::string& getLastName()    const override;
    const std::string& getAddress()     const override;
-   PeselNumber_t      getPeselNumber() const override;
+   const std::string& getPeselNumber() const override;
    const std::string& getGender()      const override;
    IndexNumber_t      getIndexNumber() const override;
 
@@ -41,7 +41,7 @@ private:
    std::string   firstName_;
    std::string   lastName_;
    std::string   address_;
-   PeselNumber_t peselNumber_;
+   std::string   peselNumber_;
    std::string   gender_;
    IndexNumber_t indexNumber_;
 };

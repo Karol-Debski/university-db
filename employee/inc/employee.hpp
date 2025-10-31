@@ -15,11 +15,11 @@ class Employee : public Record,
 {
 public:
    explicit Employee(const std::string& firstName, 
-                     const std::string&  lastName, 
-                     const std::string&  address,
-                     const PeselNumber_t peselNumber,
-                     const std::string&  gender,
-                     const Salary_t      salary)
+                     const std::string& lastName, 
+                     const std::string& address,
+                     const std::string& peselNumber,
+                     const std::string& gender,
+                     const Salary_t     salary)
       : firstName_(firstName),
         lastName_(lastName),
         address_(address),
@@ -31,19 +31,19 @@ public:
    const std::string&  getFirstName()   const override;
    const std::string&  getLastName()    const override;
    const std::string&  getAddress()     const override;
-   PeselNumber_t       getPeselNumber() const override;
+   const std::string&  getPeselNumber() const override;
    const std::string&  getGender()      const override;
    Salary_t            getSalary()      const override;
 
    const std::string  getData() const override;
 
 private:
-   std::string   firstName_;
-   std::string   lastName_;
-   std::string   address_;
-   PeselNumber_t peselNumber_;
-   std::string   gender_;
-   Salary_t      salary_;
+   std::string firstName_;
+   std::string lastName_;
+   std::string address_;
+   std::string peselNumber_;
+   std::string gender_;
+   Salary_t    salary_;
 };
 
 #endif // EMPLOYEE_H

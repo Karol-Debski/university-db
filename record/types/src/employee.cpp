@@ -36,13 +36,17 @@ const std::string Employee::getData() const
 {
    std::stringstream ss;
    
-   ss<<"Employee"<<std::endl;
-   ss<<"First name: "<<firstName_<<std::endl;
-   ss<<"Last name: "<<lastName_<<std::endl;
-   ss<<"Address: "<<address_<<std::endl;
-   ss<<"Pesel number: "<<peselNumber_<<std::endl;
-   ss<<"Gender: "<<gender_<<std::endl;
-   ss<<"Salary: "<<salary_<<std::endl;
+   ss<<firstName_<<'\n';
+   ss<<lastName_<<'\n';
+   ss<<address_<<'\n';
+   ss<<peselNumber_<<'\n';
+   ss<<gender_<<'\n';
+   ss<<salary_<<'\n';
 
    return ss.str();
 };
+
+RecordType Employee::getType() const
+{
+   return RecordType::Employee;
+}

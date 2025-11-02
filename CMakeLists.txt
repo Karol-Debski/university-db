@@ -9,19 +9,23 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Wpedantic")
 
 include_directories(
-   ${CMAKE_SOURCE_DIR}/inc
-   ${CMAKE_SOURCE_DIR}/student/inc
-   ${CMAKE_SOURCE_DIR}/employee/inc
+   ${CMAKE_SOURCE_DIR}/builders/inc
+   ${CMAKE_SOURCE_DIR}/builders/types/inc
+   ${CMAKE_SOURCE_DIR}/console-ui/inc
+   ${CMAKE_SOURCE_DIR}/database/inc
    ${CMAKE_SOURCE_DIR}/record/inc
-   ${CMAKE_SOURCE_DIR}/datebase/inc
-   
+   ${CMAKE_SOURCE_DIR}/record/types/inc
 )
 
 set(SOURCES
    main.cpp
-   student/src/student.cpp
-   employee/src/employee.cpp
-   datebase/src/datebase.cpp
+   builders/src/record_builder.cpp
+   builders/types/src/employee_builder.cpp
+   builders/types/src/student_builder.cpp
+   console-ui/src/console_ui.cpp
+   database/src/database.cpp
+   record/types/src/student.cpp
+   record/types/src/employee.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

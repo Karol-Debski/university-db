@@ -1,5 +1,5 @@
-#ifndef DATEBASE_H
-#define DATEBASE_H
+#ifndef DATABASE_H
+#define DATABASE_H
 
 #include <string>
 #include <iostream>
@@ -10,17 +10,26 @@
 #include "student.hpp"
 #include "employee.hpp"
 
-using FileHandler = std::ofstream; 
+
+
+
+using IFileHandler = std::basic_fstream<char>; 
 
 class Datebase
 {
 public:
-   Datebase(FileHandler& fileHandler, const std::string& pathToFile);
+   Datebase(IFileHandler& fileHandler);
 
    ~Datebase();
 
+   void readDatabase();
+   void writeDatabase();
+
    void addNewRecord(std::shared_ptr<Record> sp_record);
-   void displayDatabase() const;
+   std::string getContentString() const;
+
+   void setPathToFile(const std::string& pathToFile);
+   std::string getPathFile();
 
    std::vector<std::shared_ptr<const Record>> searchByLastName(const std::string& lastName) const;
    std::vector<std::shared_ptr<const Record>> searchByPeselNumber(const std::string& peselNumber) const;
@@ -32,9 +41,11 @@ public:
    void fillDatebaseWithArtificialRecords();
 
 private:
-   FileHandler& fileHandler_;
-   std::string pathToFile_;
+   IFileHandler& fileHandler_;
+   std::string   fileName_;
    std::vector<std::shared_ptr<Record>> records_; 
 };
 
-#endif // DATEBASE_H
+
+
+#endif // DATABASE_H

@@ -1,14 +1,19 @@
+#ifndef RECORD_HPP
+#define RECORD_HPP
+
 #include <string>
 
-#ifndef RECORD_H
-#define RECORD_H
+enum class RecordType
+{
+   Student,
+   Employee
+};
 
 class Record {
 public:
    virtual ~Record() {};
    virtual const std::string getData() const = 0;
-private:
-   
+   virtual RecordType getType() const = 0;
 };
 
 using IndexNumber_t = unsigned long;
@@ -63,4 +68,4 @@ public:
    virtual Salary_t getSalary() const = 0;
 };
 
-#endif // RECORD_H
+#endif // RECORD_HPP

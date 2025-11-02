@@ -36,7 +36,8 @@ public:
    IndexNumber_t      getIndexNumber() const override;
 
    const std::string  getData() const override;
-
+   RecordType         getType() const override;
+   
 private:
    std::string   firstName_;
    std::string   lastName_;

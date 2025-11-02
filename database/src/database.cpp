@@ -1,18 +1,90 @@
-#include "datebase.hpp"
+#include "database.hpp"
 #include <fstream>
 #include <algorithm>
 #include <random>
 
-Datebase::Datebase(FileHandler& fileHandler, const std::string& pathToFile)
+Datebase::Datebase(IFileHandler& fileHandler)
    : fileHandler_(fileHandler),
-     pathToFile_(pathToFile),
+     fileName_{},
      records_{}
 {
-   fileHandler_.open(pathToFile, std::ios_base::app
-                                 | std::ios_base::in
-                                 | std::ios_base::out);
 
-   /* read records */
+}
+
+void Datebase::readDatabase()
+{
+   fileHandler_.open(fileName_, std::ios::in | std::ios::out | std::ios::binary);
+
+   if(!fileHandler_.is_open()) {
+      fileHandler_.clear();
+      fileHandler_.open(fileName_, std::ios::out | std::ios::binary); // utwórz plik
+      fileHandler_.close();
+      fileHandler_.open(fileName_, std::ios::in | std::ios::out | std::ios::binary);
+   }
+             
+   int recordId;
+
+   while(fileHandler_>>recordId)
+   {
+      if(recordId == static_cast<int>(RecordType::Student))
+      {
+         std::string   firstName;
+         std::string   lastName;
+         std::string   address;
+         std::string   peselNumber;
+         std::string   gender;
+         IndexNumber_t index;
+   
+         fileHandler_>>firstName;
+         fileHandler_>>lastName;
+         fileHandler_>>address;
+         fileHandler_>>peselNumber;
+         fileHandler_>>gender;
+         fileHandler_>>index;
+         
+         records_.push_back(std::make_shared<Student>(firstName, lastName, address, peselNumber, gender, index));
+      }
+      else if(recordId == static_cast<int>(RecordType::Employee))
+      {
+         std::string firstName;
+         std::string lastName;
+         std::string address;
+         std::string peselNumber;
+         std::string gender;
+         Salary_t    salary;
+
+         fileHandler_>>firstName;
+         fileHandler_>>lastName;
+         fileHandler_>>address;
+         fileHandler_>>peselNumber;
+         fileHandler_>>gender;
+         fileHandler_>>salary;
+
+         records_.push_back(std::make_shared<Student>(firstName, lastName, address, peselNumber, gender, salary));
+      }
+   }
+}
+
+void Datebase::writeDatabase()
+{
+   fileHandler_.clear();
+   fileHandler_.seekp(0, std::ios::beg);
+
+   for(const auto& rec : records_)
+   {
+      fileHandler_<<static_cast<int>(rec->getType())<<'\n';
+      fileHandler_<<rec->getData();
+   }
+}
+
+void Datebase::setPathToFile(const std::string& pathToFile)
+{
+   fileName_ = pathToFile;
+}
+
+std::string Datebase::getPathFile()
+{
+   return fileName_;
 }
 
 Datebase::~Datebase()
@@ -61,43 +133,6 @@ std::vector<std::shared_ptr<const Record>> Datebase::searchByPeselNumber(const s
    }
    
    return records; /* RVO */
-}
-
-static bool isLeapYear(int year)
-{
-   return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 ==0));
-}
-
-static void validatePeselNumber(const std::string& peselNumber)
-{
-   int year;
-   int month;
-   int day;
-
-   if(peselNumber.size() != 11)
-   {
-      throw std::runtime_error("Wrong number of digits"); 
-   }
-
-   year = 1900 + std::stoi(peselNumber.substr(9, 2));
-
-   /* month validation */
-
-   month = std::stoi(peselNumber.substr(7, 2));
-
-   if(month == 0 && month > 12)
-      throw std::runtime_error("Month equals to 0 or it is bigger than 12"); 
-
-   /* day validation */
-
-   day = std::stoi(peselNumber.substr(5, 2));
-
-   int daysInMonth[] = {31,0,31,30,31,30,31,31,30,31,30,31};
-
-   daysInMonth[1] = (isLeapYear(year)) ? 29 : 28;
-
-   if(day == 0 && day > daysInMonth[month-1])
-      throw std::runtime_error("Day number equals to 0 or exceed days number of the month"); 
 }
 
 void Datebase::sortByPeselNumber()
@@ -256,10 +291,17 @@ void Datebase::fillDatebaseWithArtificialRecords()
    }
 }
 
-void Datebase::displayDatabase() const
+std::string Datebase::getContentString() const
 {
-   for(const auto& rec : records_)
+   std::string content;
+
    {
-      std::cout<<"----------\n"<<rec->getData();
+      for(const auto& rec : records_)
+      {
+         content += "----------\n";
+         content += rec->getData();
+      }
    }
+
+   return content;
 }

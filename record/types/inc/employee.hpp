@@ -36,6 +36,7 @@ public:
    Salary_t            getSalary()      const override;
 
    const std::string  getData() const override;
+   RecordType         getType() const override;
 
 private:
    std::string firstName_;
